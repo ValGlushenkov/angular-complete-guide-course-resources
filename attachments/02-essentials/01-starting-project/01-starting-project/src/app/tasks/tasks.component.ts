@@ -1,16 +1,19 @@
 import { Component, Input } from '@angular/core';
 import { TaskComponent } from './task/task.component';
+import {AddtaskComponent} from './addtask/addtask.component';
+import {type Task} from './task/task.model';
 
 @Component({
   selector: 'app-tasks',
   standalone: true,
   templateUrl: './tasks.component.html',
   styleUrl: './tasks.component.css',
-  imports: [TaskComponent]
+  imports: [TaskComponent, AddtaskComponent]
 })
 export class TasksComponent {
   @Input({required: true}) userId!: string;
   @Input({required: true}) name!: string;
+  isAddTaskClicked: boolean = false;
   tasks = [
     {
       id: 't1',
@@ -42,5 +45,15 @@ export class TasksComponent {
 
   onCompleteTask(id: string){
     this.tasks = this.tasks.filter((task) => task.id !== id);
+  }
+
+  onSubmitTaskListener(task: Task){
+    this.tasks.push(task);
+    this.isAddTaskClicked = false;
+  }
+
+  onAddTaskClick(){
+    this.isAddTaskClicked = true;
+
   }
 }
