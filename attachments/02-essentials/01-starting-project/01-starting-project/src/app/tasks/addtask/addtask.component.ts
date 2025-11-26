@@ -12,24 +12,22 @@ import {type Task} from '../task/task.model';
 export class AddtaskComponent {
   @Input({required:true}) selectedUserId!:string;
   @Output() sendTask = new EventEmitter<Task>();
-  task?: Task;
-  title?: string;
-  summary?: string;
-  dueDate?: string;
+
+  title: string = '';
+  summary: string = '';
+  dueDate: string = '';
 
   onSubmit(){
     let taskId = `t${Math.floor((Math.random()*1000))}`
-    const Mytask: Task = {
+    console.log(`Title: ${this.title}, summary: ${this.summary}, due date: ${this.dueDate}`);
+    this.sendTask.emit({
       id: taskId,
       userId: this.selectedUserId,
-      title: this.title ?? '',
-      summary: this.summary ?? '',
-      dueDate: this.dueDate ?? ''
+      title: this.title,
+      summary: this.summary,
+      dueDate: this.dueDate
 
-    };
-    this.task = Mytask;
-    console.log(`Title: ${this.title}, summary: ${this.summary}, due date: ${this.dueDate}`);
-    this.sendTask.emit(this.task);
+    });
 
   }
 }
