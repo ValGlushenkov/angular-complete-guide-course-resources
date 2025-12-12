@@ -16,11 +16,6 @@ export class UserInputComponent {
   duration: string | number = '';
 
   private investmentServce = inject(InvestmentService);
-
-
-  onSubmit(){
-    console.log('got to submit');
-  }
   
   onClick(){
     this.investmentServce.calculateInvestmentResults({
