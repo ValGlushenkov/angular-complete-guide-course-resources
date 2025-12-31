@@ -1,6 +1,6 @@
 import { Component, input, inject, computed, OnInit, DestroyRef } from '@angular/core';
 import { UsersService } from '../users.service';
-import {  RouterOutlet, RouterLink, ResolveFn, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import {  RouterOutlet, RouterLink, ResolveFn, ActivatedRouteSnapshot, RouterStateSnapshot, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-user-tasks',
@@ -9,13 +9,21 @@ import {  RouterOutlet, RouterLink, ResolveFn, ActivatedRouteSnapshot, RouterSta
   styleUrl: './user-tasks.component.css',
   imports: [RouterOutlet, RouterLink],
 })
-export class UserTasksComponent  {
+export class UserTasksComponent implements OnInit {
   // userId = input.required<string>();
   userName = input.required<string>();
   message = input.required<string>();
-
+  private activatedRoute = inject(ActivatedRoute)
 
   // userName = computed(() => this.usersService.users.find(u => u.id === this.userId())?.name);
+
+  ngOnInit(): void {
+    this.activatedRoute.data.subscribe({
+      next: data => {
+        console.log(data);
+      }
+    });
+  }
 
 }
 
