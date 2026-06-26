@@ -14,7 +14,7 @@ import { Component, HostBinding, HostListener, input, ViewEncapsulation } from '
 })
 export class ControlComponent {
   // @HostBinding('class') className = 'control';
-  @HostListener('click')
+  // @HostListener('click')
   label = input.required<string>();
   
    onClick(){
